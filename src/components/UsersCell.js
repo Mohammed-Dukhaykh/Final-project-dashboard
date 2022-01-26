@@ -34,9 +34,7 @@ function UsersCell(props) {
           </Button>
           {user.role != "Admin" ? (
             <>
-              {/* <Button variant="success" className="me-2" onClick={() => setEditShow(true)}>
-              Edit
-            </Button> */}
+            
               <Button variant="outline-danger" onClick={() => setDeleteShow(true)}>
                 Delete
               </Button>{" "}
