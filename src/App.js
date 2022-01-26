@@ -12,6 +12,7 @@ import Login from "./pages/Login"
 import Skills from "./pages/Skills"
 import Users from "./pages/Users"
 import JobsContext from "./utils/jobsContext"
+import firebase from "./utils/firebase"
 
 function App() {
   const [users, setUsers] = useState([])
@@ -110,12 +111,16 @@ function App() {
     e.preventDefault()
     try {
       const form = e.target
+      const avatarImage = form.elements.avatar.files[0]
+      const avatarRef = firebase.storage().ref("photo").child(`${avatarImage.lastModified}-${avatarImage.name}`)
+      await avatarRef.put(avatarImage)
+      const AvatarUrl = await avatarRef.getDownloadURL()
       const adminBody = {
         firstName: form.elements.firstName.value,
         lastName: form.elements.lastName.value,
         email: form.elements.email.value,
         password: form.elements.password.value,
-        avatar: form.elements.avatar.value,
+        avatar: AvatarUrl ,
       }
       await axios.post("http://localhost:5000/api/auth/signup-admin", adminBody, {
         headers: {

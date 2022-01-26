@@ -49,7 +49,7 @@ function AddUserModel(props) {
               Avatar
             </Form.Label>
             <Col md="8">
-              <Form.Control type="url" name="avatar" required />
+              <Form.Control type="file" name="avatar" required accept="image/png , image/jepg" />
             </Col>
           </Form.Group>
         </Modal.Body>
